@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'allauth',  # Agrega la aplicación de autenticación y registro AllAuth, que proporciona funciones avanzadas para autenticación y registro de usuarios.
     'allauth.account',  # Agrega la aplicación de cuentas de AllAuth, que se encarga del registro y la gestión de cuentas de usuario.
     'allauth.socialaccount',  # Agrega la aplicación de cuentas sociales de AllAuth, que permite la autenticación a través de servicios de redes sociales.
+    'home',
 ]
 
 
@@ -68,7 +69,11 @@ ROOT_URLCONF = 'boutique_ado.urls'  # Define el módulo de Python que contiene l
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',  # Configura el backend de plantillas de Django, que utiliza el motor de plantillas de Django para renderizar plantillas.
-        'DIRS': [],  # Lista de directorios de plantillas adicionales para buscar plantillas.
+        'DIRS': [
+        # Lista de directorios de plantillas adicionales para buscar plantillas.
+            os.path.join(BASE_DIR, 'templates'),
+            os.path.join(BASE_DIR, 'templates', 'allauth'),
+            ],  
         'APP_DIRS': True,  # Habilita la búsqueda de plantillas dentro de las carpetas de las aplicaciones instaladas.
         'OPTIONS': {
             'context_processors': [

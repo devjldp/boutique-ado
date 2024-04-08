@@ -14,10 +14,21 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+# Importa el módulo 'admin' de Django para registrar las URLs del panel de administración.
 from django.contrib import admin
+
+# Importa la función 'path' y el módulo 'include' de Django para definir las URL y para incluir URLs de otras aplicaciones.
 from django.urls import path, include
 
+# Define las URLs del proyecto.
 urlpatterns = [
+    # Asocia la URL '/admin/' con las vistas del panel de administración de Django.
     path('admin/', admin.site.urls),
+
+    # Asocia la URL '/accounts/' con las URLs relacionadas con la autenticación y registro de usuarios utilizando 'allauth'.
     path('accounts/', include('allauth.urls')),
+
+    # Asocia la URL raíz '' con las URLs definidas en la aplicación 'home'.
+    path('', include('home.urls')),
 ]
+
