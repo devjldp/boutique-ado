@@ -10,8 +10,8 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
+import os
 from pathlib import Path
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -31,43 +31,94 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
+    'django.contrib.admin',  # Agrega la aplicación de administración de Django, que proporciona una interfaz de administración web para gestionar modelos de datos.
+    'django.contrib.auth',  # Agrega la aplicación de autenticación de Django, que proporciona funciones de autenticación de usuarios.
+    'django.contrib.contenttypes',  # Agrega la aplicación de tipos de contenido de Django, que permite la asociación de contenido con modelos de datos.
+    'django.contrib.sessions',  # Agrega la aplicación de sesiones de Django, que gestiona el almacenamiento y recuperación de datos de sesión del usuario.
+    'django.contrib.messages',  # Agrega la aplicación de mensajes de Django, que proporciona un sistema de mensajería para notificar a los usuarios sobre acciones realizadas.
+    'django.contrib.staticfiles',  # Agrega la aplicación de archivos estáticos de Django, que gestiona archivos estáticos como CSS, JavaScript e imágenes.
+    'django.contrib.sites',  # Agrega la aplicación de sitios de Django, que permite gestionar múltiples sitios web desde una sola instalación de Django.
+    'allauth',  # Agrega la aplicación de autenticación y registro AllAuth, que proporciona funciones avanzadas para autenticación y registro de usuarios.
+    'allauth.account',  # Agrega la aplicación de cuentas de AllAuth, que se encarga del registro y la gestión de cuentas de usuario.
+    'allauth.socialaccount',  # Agrega la aplicación de cuentas sociales de AllAuth, que permite la autenticación a través de servicios de redes sociales.
 ]
+
 
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.security.SecurityMiddleware',  # Agrega el middleware de seguridad de Django, que proporciona funciones de seguridad para proteger la aplicación contra diversas amenazas.
+    'django.contrib.sessions.middleware.SessionMiddleware',  # Agrega el middleware de sesiones de Django, que gestiona las sesiones de usuario en la aplicación.
+    'django.middleware.common.CommonMiddleware',  # Agrega el middleware común de Django, que proporciona funcionalidades comunes para procesar solicitudes HTTP.
+    'django.middleware.csrf.CsrfViewMiddleware',  # Agrega el middleware de protección CSRF de Django, que protege contra ataques CSRF (Cross-Site Request Forgery).
+    'django.contrib.auth.middleware.AuthenticationMiddleware',  # Agrega el middleware de autenticación de Django, que gestiona la autenticación de usuarios.
+    'django.contrib.messages.middleware.MessageMiddleware',  # Agrega el middleware de mensajes de Django, que maneja los mensajes de la aplicación.
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',  # Agrega el middleware de protección contra clickjacking de Django, que previene ataques de clickjacking.
+
+    # Agrega el middleware de allauth aquí
+    'allauth.account.middleware.AccountMiddleware',
+    # Hace lo siguiente:
+    # Redireccionamiento después del inicio de sesión o registro.
+    # Manejo de URLs de cuentas
+    # Preparación de datos del usuario
 ]
 
-ROOT_URLCONF = 'boutique_ado.urls'
+
+ROOT_URLCONF = 'boutique_ado.urls'  # Define el módulo de Python que contiene las URL raíz para la aplicación Django. Este archivo de URLs raíz es el punto de entrada principal para el enrutamiento de URL en el proyecto.
+
 
 TEMPLATES = [
     {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
-        'APP_DIRS': True,
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',  # Configura el backend de plantillas de Django, que utiliza el motor de plantillas de Django para renderizar plantillas.
+        'DIRS': [],  # Lista de directorios de plantillas adicionales para buscar plantillas.
+        'APP_DIRS': True,  # Habilita la búsqueda de plantillas dentro de las carpetas de las aplicaciones instaladas.
         'OPTIONS': {
             'context_processors': [
-                'django.template.context_processors.debug',
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.debug',  # Agrega el procesador de contexto de depuración de plantillas de Django, que proporciona información de depuración a las plantillas.
+                'django.template.context_processors.request',  # requerido por django. Agrega el procesador de contexto de solicitud de plantillas de Django, necesario para el correcto funcionamiento de AllAuth.
+                'django.contrib.auth.context_processors.auth',  # Agrega el procesador de contexto de autenticación de Django, que proporciona información de autenticación a las plantillas.
+                'django.contrib.messages.context_processors.messages',  # Agrega el procesador de contexto de mensajes de Django, que proporciona mensajes de la aplicación a las plantillas.
             ],
         },
     },
 ]
 
-WSGI_APPLICATION = 'boutique_ado.wsgi.application'
+AUTHENTICATION_BACKENDS = (
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
+
+SITE_ID = 1  # Define el ID del sitio actual en la base de datos. Es utilizado por algunas aplicaciones de Django para distinguir entre múltiples sitios en una misma instalación.
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.Emailbackend'
+
+# Define el método de autenticación permitido. 
+# En este caso, se permite iniciar sesión utilizando tanto el nombre de usuario como la dirección de correo electrónico.
+ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
+
+# Indica si se requiere que los usuarios proporcionen una dirección de correo electrónico durante el registro.
+ACCOUNT_EMAIL_REQUIRED = True
+
+# Configura si se requiere la verificación de correo electrónico durante el registro.
+# En este caso, se establece en 'mandatory', lo que significa que la verificación de correo electrónico es obligatoria antes de que el usuario pueda iniciar sesión.
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+
+# Configura si se debe solicitar que el usuario ingrese su dirección de correo electrónico dos veces durante el proceso de registro para evitar errores de escritura.
+ACCOUNT_SIGNUP_EMAIL_ENTER_TWICE = True
+
+# Establece la longitud mínima permitida para el nombre de usuario.
+ACCOUNT_USERNAME_MIN_LENGTH = 4
+
+# Define la URL a la que se redirige después de iniciar sesión.
+LOGIN_URL = '/accounts/login/'
+
+# Define la URL a la que se redirige después de iniciar sesión correctamente.
+LOGIN_REDIRECT_URL = '/success' # Esta es termporal
+
+
+WSGI_APPLICATION = 'boutique_ado.wsgi.application'  # Define la aplicación WSGI utilizada para servir la aplicación Django. Este es el punto de entrada para la comunicación entre el servidor web y la aplicación Django.
+
 
 
 # Database
