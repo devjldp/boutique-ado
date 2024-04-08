@@ -114,7 +114,7 @@ ACCOUNT_USERNAME_MIN_LENGTH = 4
 LOGIN_URL = '/accounts/login/'
 
 # Define la URL a la que se redirige después de iniciar sesión correctamente.
-LOGIN_REDIRECT_URL = '/success' # Esta es termporal
+LOGIN_REDIRECT_URL = '/' # Esta es termporal
 
 
 WSGI_APPLICATION = 'boutique_ado.wsgi.application'  # Define la aplicación WSGI utilizada para servir la aplicación Django. Este es el punto de entrada para la comunicación entre el servidor web y la aplicación Django.
