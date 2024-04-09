@@ -20,6 +20,13 @@ from django.contrib import admin
 # Importa la función 'path' y el módulo 'include' de Django para definir las URL y para incluir URLs de otras aplicaciones.
 from django.urls import path, include
 
+# Importar la configuración del proyecto Django.
+from django.conf import settings
+
+# Importar la función para servir archivos estáticos desde la configuración.
+from django.conf.urls.static import static
+
+
 # Define las URLs del proyecto.
 urlpatterns = [
     # Asocia la URL '/admin/' con las vistas del panel de administración de Django.
@@ -30,5 +37,5 @@ urlpatterns = [
 
     # Asocia la URL raíz '' con las URLs definidas en la aplicación 'home'.
     path('', include('home.urls')),
-]
+] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
 

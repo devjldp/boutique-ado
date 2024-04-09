@@ -171,7 +171,20 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = 'static/'
+# Configuración de la URL base para los archivos estáticos del proyecto.
+STATIC_URL = '/static/'
+
+# Directorios adicionales donde Django buscará archivos estáticos.
+# Se utiliza os.path.join para construir la ruta absoluta al directorio 'static' dentro de BASE_DIR.
+STATICFILES_DIRS = (os.path.join(BASE_DIR,'static'),)
+
+# Configuración de la URL base para los archivos multimedia del proyecto.
+MEDIA_URL = '/media/'
+
+# Ruta absoluta en el sistema de archivos donde se almacenarán los archivos multimedia cargados por los usuarios.
+# Se utiliza os.path.join para construir la ruta absoluta al directorio 'media' dentro de BASE_DIR.
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field

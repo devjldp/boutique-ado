@@ -1,0 +1,93 @@
+/* Establece la altura del elemento HTML al 100% del tamaño del viewport */
+html {
+  height: 100%;
+}
+
+/* Estilos generales para el cuerpo del documento */
+body {
+  /* Fondo con una imagen centrada y ajustada al tamaño del viewport */
+  background: url('/media/homepage_background_cropped.jpg') no-repeat center center fixed;
+  background-size: cover;
+  /* Establece la altura del cuerpo restando 164px de la altura del viewport */
+  height: calc(100vh - 164px);
+  color: #555; /* Color de texto */
+  font-family: 'Lato'; /* Fuente del texto */
+}
+
+/* Estilos para los íconos (probablemente de Bulma) */
+/* Bulma es un framework para css similar a botstrap  */
+.icon {
+  align-items: center;
+  display: inline-flex;
+  justify-content: center;
+  height: 1.5rem;
+  width: 1.5rem;
+}
+
+/* Estilos para el texto de la marca */
+.logo-font {
+  text-transform: uppercase; /* Transforma el texto en mayúsculas */
+}
+
+/* Estilos para el enlace de la marca principal */
+.main-logo-link {
+  width: fit-content; /* Ancho ajustado al contenido */
+}
+
+/* Estilos para el botón "Shop Now" */
+.shop-now-button {
+  background: black; /* Fondo negro */
+  color: white; /* Texto blanco */
+  min-width: 260px; /* Ancho mínimo */
+}
+
+/* Estilos para los botones de fondo negro */
+.btn-black {
+  background: black; /* Fondo negro */
+  color: white; /* Texto blanco */
+}
+
+/* Estilos para cuando el cursor está sobre los botones "Shop Now" o "btn-black" */
+.shop-now-button:hover,
+.shop-now-button:active,
+.shop-now-button:focus,
+.btn-black:hover,
+.btn-black:active,
+.btn-black:focus {
+  background: #222; /* Fondo ligeramente más oscuro */
+  color: white; /* Texto blanco */
+}
+
+/* Estilos para el texto negro */
+.text-black {
+  color: #000 !important; /* Texto negro */
+}
+
+/* Estilos para el borde negro */
+.border-black {
+  border: 1px solid black !important; /* Borde sólido de 1px en negro */
+}
+
+/* Media queries para pantallas grandes (xl) */
+@media (min-width: 1200px) {
+  .container {
+    max-width: 80%; /* Ancho máximo del contenedor al 80% */
+  }
+}
+
+/* Media queries para pantallas medianas (md) y grandes (lg) */
+@media (min-width: 992px) {
+  /* Estilos para la barra de navegación fija en la parte superior solo en pantallas medianas y grandes */
+  .fixed-top-desktop-only {
+    position: fixed; /* Posición fija */
+    top: 0; /* Arriba de la página */
+    right: 0; /* A la derecha de la página */
+    left: 0; /* A la izquierda de la página */
+    z-index: 1030; /* Capa z-index */
+  }
+
+  /* Espacio adicional en la parte superior para compensar la barra de navegación fija */
+  .header-container {
+    padding-top: 164px; /* Espacio en la parte superior igual a 164px */
+  }
+}
