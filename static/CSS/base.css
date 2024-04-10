@@ -68,6 +68,11 @@ body {
   border: 1px solid black !important; /* Borde sólido de 1px en negro */
 }
 
+.bg-black{
+  background: #000000 !important;
+}
+
+
 /* Media queries para pantallas grandes (xl) */
 @media (min-width: 1200px) {
   .container {
