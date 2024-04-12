@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'allauth.account',  # Agrega la aplicación de cuentas de AllAuth, que se encarga del registro y la gestión de cuentas de usuario.
     'allauth.socialaccount',  # Agrega la aplicación de cuentas sociales de AllAuth, que permite la autenticación a través de servicios de redes sociales.
     'home', # Agrega la aplicacion home
+    'products', # Agrega la aplicacion products
 ]
 
 
